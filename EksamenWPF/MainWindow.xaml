@@ -1,0 +1,162 @@
+﻿<Window x:Class="EksamenWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EksamenWPF"
+        xmlns:views="clr-namespace:EksamenWPF.Views"
+        xmlns:ViewModels="clr-namespace:EksamenWPF.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Modelbureau" Height="550" Width="1200" >
+
+    <Window.Resources>
+        <DataTemplate x:Name="TermsAndServices" DataType="{x:Type ViewModels:TermsAndServicesViewModel}">
+            <views:TermsAndServices DataContext="{Binding}"></views:TermsAndServices>
+        </DataTemplate>
+    </Window.Resources>
+
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu DockPanel.Dock="Top" Grid.ColumnSpan="3">
+            <MenuItem Header="Print" ToolTip="Here you can print a list of following...">
+                <MenuItem Header="Print models"></MenuItem>
+                <MenuItem Header="Print jobs available"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+               
+
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" FontWeight="Bold">Register of models:</Label>
+            <Button Grid.Column="1" Width="auto" Name="AddModelBttn" Click="AddModelBttn_OnClick">Add model to list</Button>
+            <Button Grid.Column="2" Width="auto"  Command="{Binding Path=DeleteCommand}" 
+                    IsEnabled="{Binding ElementName=ItemList, Path=SelectedItems.Count}" CommandParameter="{Binding ElementName=ItemList, Path=SelectedItem}">Remove selected model</Button>
+           
+
+
+
+        </Grid >
+        <ListView DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Models}" Grid.Row="2" Grid.ColumnSpan="3" Background="AliceBlue"  Name="ItemList" ItemsSource="{Binding}" Loaded="ItemList_OnLoaded" SelectedItem="{Binding CurrentModel}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=ModelId}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                    <GridViewColumn Width="130" Header="Telephone Number" DisplayMemberBinding="{Binding Path=TelephoneNumber}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Address" DisplayMemberBinding="{Binding Path=Address}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Height" DisplayMemberBinding="{Binding Path=Height}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Weight" DisplayMemberBinding="{Binding Path=Weight}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Hair color" DisplayMemberBinding="{Binding Path=HairColor}"></GridViewColumn>
+                    <GridViewColumn Width="auto" Header="Comments" DisplayMemberBinding="{Binding Path=Comments}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <Grid Grid.Row="3" Grid.Column="0" ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+               </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" FontWeight="Bold">List of tasks:</Label>
+            <Button Grid.Column="1" Width="auto" Click="Button_Click">Add task to list</Button>
+            <Button Grid.Column="2" Click="ButtonBase_OnClick" CommandParameter="{Binding ElementName=ListView2, Path=SelectedItem}" IsEnabled="{Binding ElementName=ListView2, Path=SelectedItems.Count}">Assign model to task</Button>
+            </Grid>
+
+        <ListView Grid.Row="4" Background="AntiqueWhite" Grid.ColumnSpan="2" Name="ListView2" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Opgaver}" Loaded="ListView2_OnLoaded">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=OpgaveId}"></GridViewColumn>
+                    <GridViewColumn Width="170" Header="Customer (name of customer)" DisplayMemberBinding="{Binding Path=Customer}"></GridViewColumn>
+                    <GridViewColumn Width="90" Header="Start date" DisplayMemberBinding="{Binding Path=StartDate}"></GridViewColumn>
+                    <GridViewColumn Width="100" Header="Number of days" DisplayMemberBinding="{Binding Path=NumberOfDays}"></GridViewColumn>
+                    <GridViewColumn Width="110" Header="Location (adresse)" DisplayMemberBinding="{Binding Path=Location}"></GridViewColumn>
+                    <GridViewColumn Width="110" Header="Nbr. of models" DisplayMemberBinding="{Binding Path=NumberOfModels}"></GridViewColumn>
+                    <GridViewColumn Width="auto" Header="Comments" DisplayMemberBinding="{Binding Path=Comments}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" FontWeight="Bold">List of tasks taken:</Label>
+       
+    </Grid>
+        <ListView Grid.Column="2" Grid.Row="4" Background="Gainsboro" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Assignments}" Loaded="FrameworkElement_OnLoaded">
+        <ListView.View>
+            <GridView>
+                    <GridViewColumn Width="auto" Header="Id." DisplayMemberBinding="{Binding Path=AssignmentId}"></GridViewColumn>
+                    <GridViewColumn Width="auto" Header="Customer" DisplayMemberBinding="{Binding Path=Customer}"></GridViewColumn>
+                    <GridViewColumn Width="auto" Header="Model name" DisplayMemberBinding="{Binding Path=ModelName}"></GridViewColumn>
+                </GridView>
+        </ListView.View>
+        </ListView>
+
+        <StatusBar Grid.Row="5" Grid.ColumnSpan="3">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem FontSize="10" HorizontalAlignment="Left" Margin="5,0,0,0" Opacity="0.5">StudNr.: 201508876</StatusBarItem>
+            <StatusBarItem Grid.Column="1" FontSize="10" HorizontalAlignment="Center" Opacity="0.5">
+                <Button Margin="0" BorderThickness="0" Background="Transparent" Click="SwitchToPageTwo">Click here for terms and services</Button>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="4" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" Opacity="0.5">Page 1 of 2</StatusBarItem>
+        </StatusBar>
+        <!--<ContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="5" Content="{Binding}"></ContentControl>-->
+
+
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5"/>
+                <Style.Triggers>
+                    <Trigger Property="Control.IsMouseOver" Value="True">
+                        <Setter Property="Control.Foreground" Value="DarkRed"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Margin" Value="5,0,5,5"></Setter>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
+
+        </Grid.Resources>
+
+    </Grid>
+  
+
+</Window>
