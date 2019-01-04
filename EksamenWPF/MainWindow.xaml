@@ -87,7 +87,7 @@
         <ListView Grid.Row="4" Background="AntiqueWhite" Grid.ColumnSpan="2" Name="ListView2" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.jobs}" Loaded="ListView2_OnLoaded">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=OpgaveId}"></GridViewColumn>
+                    <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=JobId}"></GridViewColumn>
                     <GridViewColumn Width="170" Header="Customer (name of customer)" DisplayMemberBinding="{Binding Path=Customer}"></GridViewColumn>
                     <GridViewColumn Width="90" Header="Start date" DisplayMemberBinding="{Binding Path=StartDate}"></GridViewColumn>
                     <GridViewColumn Width="100" Header="Number of days" DisplayMemberBinding="{Binding Path=NumberOfDays}"></GridViewColumn>
