@@ -17,9 +17,6 @@ namespace EksamenWPF_WEB.Models
         public string Text { get; set; }
         public int Cost { get; set; }
 
-        public int ModelId { get; set; }
 
-        [ForeignKey("Id")]
-        public Model Model { get; set; }
     }
 }

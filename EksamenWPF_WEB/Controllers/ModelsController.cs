@@ -83,34 +83,29 @@ namespace EksamenWPF_WEB.Controllers
 
         }
 
+        public async Task<IActionResult> CreateExpenses([Bind("Job,Date,Text,Cost")] JobReport test)
+        {
+           
+            _context.JobReports.Add(test);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
+            
+        }
+
         public async Task<IActionResult> expenses()
         {
-            var emailOfLoggedInUser = User.Identity.Name;    // we first find email
-            var phoneNumberOfLoggedInUser = _context.Users.Where(users => users.Email == emailOfLoggedInUser)
-                .Select(p => p.TelephoneNumber).FirstOrDefault();   // then our phonenumber
-
-            string fetchedModelName = _context.Models.Where(p => p.TelephoneNumber == phoneNumberOfLoggedInUser)
-                .Select(t => t.Name).FirstOrDefault();  //Then we via matching phone numbers from our user and model, we fetch the specifikname
-
-            List<string> compayNames = _context.Assignments.Where(p => p.ModelName == fetchedModelName)
-                .Select(t => t.Customer).ToList();
-
-            List<Job> jobs = new List<Job>();
-
-            foreach (var item in compayNames)
-            {
-                var jobHolder = _context.Jobs.Where(p => p.Customer == item).FirstOrDefault();
-                if ((DateTime.Parse(jobHolder.StartDate) < DateTime.Today))
-                {
-                    jobs.Add(jobHolder);
-                }
-
-            }
-
-            return View(jobs);
+            return View();
 
         }
 
+
+        public async Task<IActionResult> listJobsDone()
+        {
+            var holder = _context.JobReports.ToList();
+            return View(holder);
+            
+        }
+        
 
 
         // GET: Models/Details/5

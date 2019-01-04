@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EksamenWPF_WEB.Models.JobReport>
+
+@{
+    ViewData["Title"] = "listJobsDone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>listJobsDone</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.JobReportId">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.JobReportId">Details</a> |
+                @*<a asp-action="Delete" asp-route-id="@item.JobReportId">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

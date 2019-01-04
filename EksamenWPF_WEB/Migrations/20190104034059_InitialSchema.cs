@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EksamenWPF_WEB.Migrations
 {
-    public partial class InitialSchemaV5 : Migration
+    public partial class InitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +60,22 @@ namespace EksamenWPF_WEB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobReports",
+                columns: table => new
+                {
+                    JobReportId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Job = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Text = table.Column<string>(nullable: true),
+                    Cost = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobReports", x => x.JobReportId);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,6 +280,9 @@ namespace EksamenWPF_WEB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Assignments");
+
+            migrationBuilder.DropTable(
+                name: "JobReports");
 
             migrationBuilder.DropTable(
                 name: "Jobs");

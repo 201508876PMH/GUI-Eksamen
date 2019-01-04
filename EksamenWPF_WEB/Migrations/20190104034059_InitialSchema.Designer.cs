@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamenWPF_WEB.Migrations
 {
     [DbContext(typeof(EksamenWPF_WEBContext))]
-    [Migration("20190104031306_InitialSchemaV6")]
-    partial class InitialSchemaV6
+    [Migration("20190104034059_InitialSchema")]
+    partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,7 +114,9 @@ namespace EksamenWPF_WEB.Migrations
 
             modelBuilder.Entity("EksamenWPF_WEB.Models.JobReport", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("JobReportId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Cost");
 
@@ -122,13 +124,9 @@ namespace EksamenWPF_WEB.Migrations
 
                     b.Property<string>("Job");
 
-                    b.Property<int>("JobReportId");
-
-                    b.Property<int>("ModelId");
-
                     b.Property<string>("Text");
 
-                    b.HasKey("Id");
+                    b.HasKey("JobReportId");
 
                     b.ToTable("JobReports");
                 });
@@ -270,14 +268,6 @@ namespace EksamenWPF_WEB.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("EksamenWPF_WEB.Models.JobReport", b =>
-                {
-                    b.HasOne("EksamenWPF_WEB.Models.Model", "Model")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

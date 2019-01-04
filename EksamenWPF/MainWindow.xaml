@@ -130,9 +130,9 @@
             </StatusBar.ItemsPanel>
             <StatusBarItem FontSize="10" HorizontalAlignment="Left" Margin="5,0,0,0" Opacity="0.5">StudNr.: 201508876</StatusBarItem>
             <StatusBarItem Grid.Column="1" FontSize="10" HorizontalAlignment="Center" Opacity="0.5">
-                <Button Margin="0" BorderThickness="0" Background="Transparent" Click="SwitchToPageTwo">Click here for terms and services</Button>
+                <Button Margin="0" BorderThickness="0" Background="Transparent">GUI eksamen 2019</Button>
             </StatusBarItem>
-            <StatusBarItem Grid.Column="4" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" Opacity="0.5">Page 1 of 2</StatusBarItem>
+            <StatusBarItem Grid.Column="4" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" Opacity="0.5">Page 1 of 1</StatusBarItem>
         </StatusBar>
         <!--<ContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="5" Content="{Binding}"></ContentControl>-->
 
