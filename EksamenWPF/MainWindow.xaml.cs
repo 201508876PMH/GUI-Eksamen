@@ -32,7 +32,7 @@ namespace EksamenWPF
         public class Datacontexts 
         {
             public Models.Models Models { get; set; } = new Models.Models();
-            public Opgaver Opgaver { get; set; } = new Opgaver();
+            public Jobs jobs { get; set; } = new Jobs();
 
             public Assignments Assignments { get; set; } = new Assignments();
 
@@ -71,13 +71,16 @@ namespace EksamenWPF
             DataAccessLayer DAL = new DataAccessLayer();
            
             var result = await DAL.GETList();
-
-            Model[] array = JsonConvert.DeserializeObject<Model[]>(result);
-            foreach (var item in array)
+            if (!result.Equals(0))
             {
-               
-                ((Datacontexts)DataContext).Models.Add(item);
+                Model[] array = JsonConvert.DeserializeObject<Model[]>(result);
+                foreach (var item in array)
+                {
+
+                    ((Datacontexts)DataContext).Models.Add(item);
+                }
             }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -86,7 +89,7 @@ namespace EksamenWPF
             dlg.Owner = this;
 
 
-            dlg.DataContext = ((Datacontexts)this.DataContext).Opgaver;
+            dlg.DataContext = ((Datacontexts)this.DataContext).jobs;
 
             if (dlg.ShowDialog() == true)
             {
@@ -97,16 +100,19 @@ namespace EksamenWPF
 
         private async void ListView2_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //ItemList.FontSize = 14;
+            ItemList.FontSize = 14;
             DataAccessLayer DAL = new DataAccessLayer();
-           
-            var result = await DAL.GETListOpgaver();
 
-            Opgave[] array = JsonConvert.DeserializeObject<Opgave[]>(result);
-            foreach (var item in array)
+            var result = await DAL.GETListJobs();
+            if (!result.Equals(0))
             {
-                ((Datacontexts)DataContext).Opgaver.Add(item);
+                Job[] array = JsonConvert.DeserializeObject<Job[]>(result);
+                foreach (var item in array)
+                {
+                    ((Datacontexts)DataContext).jobs.Add(item);
+                }
             }
+
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -116,7 +122,7 @@ namespace EksamenWPF
             dlg.DataContext = ((Datacontexts)this.DataContext).Assignments;
 
 
-            Opgave selectedOpgave = (Opgave)ListView2.SelectedItems[0];
+            Job selectedOpgave = (Job)ListView2.SelectedItems[0];
             dlg.ChosenCustomerTxtField.Text = selectedOpgave.Customer;
 
             Models.Models modelsToChooseFrom = (Models.Models) ItemList.ItemsSource;
@@ -134,12 +140,15 @@ namespace EksamenWPF
             DataAccessLayer DAL = new DataAccessLayer();
 
             var result = await DAL.GETListAssignment();
-
-            Assignment[] array = JsonConvert.DeserializeObject<Assignment[]>(result);
-            foreach (var item in array)
+            if (!result.Equals(0))
             {
-                ((Datacontexts)DataContext).Assignments.Add(item);
+                Assignment[] array = JsonConvert.DeserializeObject<Assignment[]>(result);
+                foreach (var item in array)
+                {
+                    ((Datacontexts)DataContext).Assignments.Add(item);
+                }
             }
+            
         }
     }
 }

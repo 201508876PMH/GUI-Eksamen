@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace EksamenAPI.Models
 {
-    public class Opgave
+    public class Job
     {
         // Primary key
-        public int OpgaveId { get; set; }
+        public int JobId { get; set; }
 
         public string Customer { get; set; }
         public string StartDate { get; set; }

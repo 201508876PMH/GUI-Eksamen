@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>aspnet-EksamenWPF_WEB-F956D337-FB6A-4C0C-9AC8-A0C41480ED11</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

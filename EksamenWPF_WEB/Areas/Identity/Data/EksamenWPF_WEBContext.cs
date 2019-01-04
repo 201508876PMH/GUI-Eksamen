@@ -25,6 +25,9 @@ namespace EksamenWPF_WEB.Models
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<EksamenWPF_WEB.Models.Model> Model { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobReport> JobReports { get; set; }
     }
 }

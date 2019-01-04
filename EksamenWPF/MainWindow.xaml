@@ -83,7 +83,7 @@
             <Button Grid.Column="2" Click="ButtonBase_OnClick" CommandParameter="{Binding ElementName=ListView2, Path=SelectedItem}" IsEnabled="{Binding ElementName=ListView2, Path=SelectedItems.Count}">Assign model to task</Button>
             </Grid>
 
-        <ListView Grid.Row="4" Background="AntiqueWhite" Grid.ColumnSpan="2" Name="ListView2" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Opgaver}" Loaded="ListView2_OnLoaded">
+        <ListView Grid.Row="4" Background="AntiqueWhite" Grid.ColumnSpan="2" Name="ListView2" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.jobs}" Loaded="ListView2_OnLoaded">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=OpgaveId}"></GridViewColumn>

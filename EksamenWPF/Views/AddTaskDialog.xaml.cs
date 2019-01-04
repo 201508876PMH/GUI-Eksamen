@@ -22,6 +22,7 @@ namespace EksamenWPF.Views
         public AddTaskDialog()
         {
             InitializeComponent();
+            StarDateTxtBttn.Text = DateTime.Today.ToShortDateString();
         }
 
         private void AddBttn_OnClick(object sender, RoutedEventArgs e)

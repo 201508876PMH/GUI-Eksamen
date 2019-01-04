@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EksamenWPF_WEB.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EksamenWPF_WEB.Controllers
 {
@@ -21,8 +22,96 @@ namespace EksamenWPF_WEB.Controllers
         // GET: Models
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Model.ToListAsync());
+            return View(await _context.Models.ToListAsync());
         }
+
+        public async Task<IActionResult> UpComing()
+        {
+            var emailOfLoggedInUser = User.Identity.Name;    // we first find email
+            var phoneNumberOfLoggedInUser = _context.Users.Where(users => users.Email == emailOfLoggedInUser)
+                .Select(p => p.TelephoneNumber).FirstOrDefault();   // then our phonenumber
+
+            string fetchedModelName = _context.Models.Where(p => p.TelephoneNumber == phoneNumberOfLoggedInUser)
+                .Select(t => t.Name).FirstOrDefault();  //Then we via matching phone numbers from our user and model, we fetch the specifikname
+
+            List<string> compayNames = _context.Assignments.Where(p => p.ModelName == fetchedModelName)
+                .Select(t => t.Customer).ToList();
+
+            List<Job> jobs = new List<Job>();
+
+            foreach (var item in compayNames)
+            {
+                var jobHolder = _context.Jobs.Where(p => p.Customer == item).FirstOrDefault();
+                if((DateTime.Parse(jobHolder.StartDate) > DateTime.Today))
+                {
+                    jobs.Add(jobHolder);
+                }
+                
+            }
+
+            return View(jobs);
+
+        }
+
+
+
+        public async Task<IActionResult> previous()
+        {
+            var emailOfLoggedInUser = User.Identity.Name;    // we first find email
+            var phoneNumberOfLoggedInUser = _context.Users.Where(users => users.Email == emailOfLoggedInUser)
+                .Select(p => p.TelephoneNumber).FirstOrDefault();   // then our phonenumber
+
+            string fetchedModelName = _context.Models.Where(p => p.TelephoneNumber == phoneNumberOfLoggedInUser)
+                .Select(t => t.Name).FirstOrDefault();  //Then we via matching phone numbers from our user and model, we fetch the specifikname
+
+            List<string> compayNames = _context.Assignments.Where(p => p.ModelName == fetchedModelName)
+                .Select(t => t.Customer).ToList();
+
+            List<Job> jobs = new List<Job>();
+
+            foreach (var item in compayNames)
+            {
+                var jobHolder = _context.Jobs.Where(p => p.Customer == item).FirstOrDefault();
+                if ((DateTime.Parse(jobHolder.StartDate) < DateTime.Today))
+                {
+                    jobs.Add(jobHolder);
+                }
+
+            }
+
+            return View(jobs);
+
+        }
+
+        public async Task<IActionResult> expenses()
+        {
+            var emailOfLoggedInUser = User.Identity.Name;    // we first find email
+            var phoneNumberOfLoggedInUser = _context.Users.Where(users => users.Email == emailOfLoggedInUser)
+                .Select(p => p.TelephoneNumber).FirstOrDefault();   // then our phonenumber
+
+            string fetchedModelName = _context.Models.Where(p => p.TelephoneNumber == phoneNumberOfLoggedInUser)
+                .Select(t => t.Name).FirstOrDefault();  //Then we via matching phone numbers from our user and model, we fetch the specifikname
+
+            List<string> compayNames = _context.Assignments.Where(p => p.ModelName == fetchedModelName)
+                .Select(t => t.Customer).ToList();
+
+            List<Job> jobs = new List<Job>();
+
+            foreach (var item in compayNames)
+            {
+                var jobHolder = _context.Jobs.Where(p => p.Customer == item).FirstOrDefault();
+                if ((DateTime.Parse(jobHolder.StartDate) < DateTime.Today))
+                {
+                    jobs.Add(jobHolder);
+                }
+
+            }
+
+            return View(jobs);
+
+        }
+
+
 
         // GET: Models/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,7 +121,7 @@ namespace EksamenWPF_WEB.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Model
+            var model = await _context.Models
                 .FirstOrDefaultAsync(m => m.ModelId == id);
             if (model == null)
             {
@@ -72,7 +161,7 @@ namespace EksamenWPF_WEB.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Model.FindAsync(id);
+            var model = await _context.Models.FindAsync(id);
             if (model == null)
             {
                 return NotFound();
@@ -123,7 +212,7 @@ namespace EksamenWPF_WEB.Controllers
                 return NotFound();
             }
 
-            var model = await _context.Model
+            var model = await _context.Models
                 .FirstOrDefaultAsync(m => m.ModelId == id);
             if (model == null)
             {
@@ -138,15 +227,15 @@ namespace EksamenWPF_WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var model = await _context.Model.FindAsync(id);
-            _context.Model.Remove(model);
+            var model = await _context.Models.FindAsync(id);
+            _context.Models.Remove(model);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ModelExists(int id)
         {
-            return _context.Model.Any(e => e.ModelId == id);
+            return _context.Models.Any(e => e.ModelId == id);
         }
     }
 }

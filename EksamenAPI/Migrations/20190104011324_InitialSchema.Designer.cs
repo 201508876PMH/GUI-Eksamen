@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamenAPI.Migrations
 {
     [DbContext(typeof(ModelContext))]
-    [Migration("20190103140446_Second")]
-    partial class Second
+    [Migration("20190104011324_InitialSchema")]
+    partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,21 @@ namespace EksamenAPI.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EksamenAPI.Models.Assignment", b =>
+                {
+                    b.Property<int>("AssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Customer");
+
+                    b.Property<string>("ModelName");
+
+                    b.HasKey("AssignmentId");
+
+                    b.ToTable("Assignments");
+                });
 
             modelBuilder.Entity("EksamenAPI.Models.Model", b =>
                 {
@@ -36,7 +51,7 @@ namespace EksamenAPI.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("TelephoneNumber");
+                    b.Property<string>("TelephoneNumber");
 
                     b.Property<int>("Weight");
 

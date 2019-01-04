@@ -49,7 +49,7 @@ namespace EksamenAPI.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("TelephoneNumber");
+                    b.Property<string>("TelephoneNumber");
 
                     b.Property<int>("Weight");
 

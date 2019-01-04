@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EksamenWPF_WEB.Migrations
 {
-    public partial class second : Migration
+    public partial class InitialSchemaV5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,8 @@ namespace EksamenWPF_WEB.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    TelephoneNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,13 +49,45 @@ namespace EksamenWPF_WEB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Model",
+                name: "Assignments",
+                columns: table => new
+                {
+                    AssignmentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ModelName = table.Column<string>(nullable: true),
+                    Customer = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Jobs",
+                columns: table => new
+                {
+                    JobId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Customer = table.Column<string>(nullable: true),
+                    StartDate = table.Column<string>(nullable: true),
+                    NumberOfDays = table.Column<int>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
+                    NumberOfModels = table.Column<int>(nullable: false),
+                    Comments = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jobs", x => x.JobId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Models",
                 columns: table => new
                 {
                     ModelId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    TelephoneNumber = table.Column<int>(nullable: false),
+                    TelephoneNumber = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Height = table.Column<int>(nullable: false),
                     Weight = table.Column<int>(nullable: false),
@@ -63,7 +96,7 @@ namespace EksamenWPF_WEB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Model", x => x.ModelId);
+                    table.PrimaryKey("PK_Models", x => x.ModelId);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,7 +263,13 @@ namespace EksamenWPF_WEB.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Model");
+                name: "Assignments");
+
+            migrationBuilder.DropTable(
+                name: "Jobs");
+
+            migrationBuilder.DropTable(
+                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -12,10 +12,10 @@ using Newtonsoft.Json;
 
 namespace EksamenWPF.Models
 {
-    public class Opgave
+    public class Job
     {
-        // Primary key from db
-        public int OpgaveId { get; set; }
+        // Primary key
+        public int JobId { get; set; }
 
         public string Customer { get; set; }
         public string StartDate { get; set; }
@@ -25,8 +25,7 @@ namespace EksamenWPF.Models
         public string Comments { get; set; }
     }
 
-
-    public class Opgaver : ObservableCollection<Opgave>
+    public class Jobs : ObservableCollection<Job>
     {
         DataAccessLayer DAL = new DataAccessLayer();
 
@@ -35,10 +34,10 @@ namespace EksamenWPF.Models
 
         public ICommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new RelayCommand<object>(addOpgave)); }
+            get { return _addCommand ?? (_addCommand = new RelayCommand<object>(addJob)); }
         }
 
-        public void addOpgave(object parameter)
+        public void addJob(object parameter)
         {
             object[] array = (object[])parameter;
 
@@ -48,31 +47,31 @@ namespace EksamenWPF.Models
             var location = array[3].ToString();
             var numberOfModels = array[4].ToString();
             var comments = array[5].ToString();
-           
 
 
-            Opgave newOpgave = new Opgave();
+
+            Job newOpgave = new Job();
             newOpgave.Customer = customer;
             newOpgave.StartDate = startDate;
             newOpgave.NumberOfDays = Int32.Parse(numberOfDays);
             newOpgave.Location = location;
             newOpgave.NumberOfModels = Int32.Parse(numberOfModels);
             newOpgave.Comments = comments;
-      
-
-           
 
 
-            var respons = DAL.POSTAddNewOpgave(newOpgave);
+
+
+
+            var respons = DAL.POSTAddNewJob(newOpgave);
 
             if (respons.Result.StatusCode == HttpStatusCode.Created)
             {
                 MessageBox.Show("Item added successfully, with statuscode: " + respons.Result.StatusCode);
 
                 var holder = respons.Result.Content.ReadAsStringAsync();
-                var DeserialisedHolder = JsonConvert.DeserializeObject<Opgave>(holder.Result);
+                var DeserialisedHolder = JsonConvert.DeserializeObject<Job>(holder.Result);
 
-                newOpgave.OpgaveId = DeserialisedHolder.OpgaveId;
+                newOpgave.JobId = DeserialisedHolder.JobId;
                 Add(newOpgave);
             }
             else

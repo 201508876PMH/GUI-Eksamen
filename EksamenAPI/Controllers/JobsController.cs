@@ -12,56 +12,56 @@ namespace EksamenAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OpgavesController : ControllerBase
+    public class JobsController : ControllerBase
     {
         private readonly ModelContext _context;
 
-        public OpgavesController(ModelContext context)
+        public JobsController(ModelContext context)
         {
             _context = context;
         }
 
-        // GET: api/Opgaves
+        // GET: api/Jobs
         [HttpGet]
-        public IEnumerable<Opgave> GetOpgaver()
+        public IEnumerable<Job> GetJobs()
         {
-            return _context.Opgaver;
+            return _context.Jobs;
         }
 
-        // GET: api/Opgaves/5
+        // GET: api/Jobs/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOpgave([FromRoute] int id)
+        public async Task<IActionResult> GetJob([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var opgave = await _context.Opgaver.FindAsync(id);
+            var job = await _context.Jobs.FindAsync(id);
 
-            if (opgave == null)
+            if (job == null)
             {
                 return NotFound();
             }
 
-            return Ok(opgave);
+            return Ok(job);
         }
 
-        // PUT: api/Opgaves/5
+        // PUT: api/Jobs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOpgave([FromRoute] int id, [FromBody] Opgave opgave)
+        public async Task<IActionResult> PutJob([FromRoute] int id, [FromBody] Job job)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != opgave.OpgaveId)
+            if (id != job.JobId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(opgave).State = EntityState.Modified;
+            _context.Entry(job).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace EksamenAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OpgaveExists(id))
+                if (!JobExists(id))
                 {
                     return NotFound();
                 }
@@ -82,45 +82,45 @@ namespace EksamenAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Opgaves
+        // POST: api/Jobs
         [HttpPost]
-        public async Task<IActionResult> PostOpgave([FromBody] Opgave opgave)
+        public async Task<IActionResult> PostJob([FromBody] Job job)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Opgaver.Add(opgave);
+            _context.Jobs.Add(job);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOpgave", new { id = opgave.OpgaveId }, opgave);
+            return CreatedAtAction("GetJob", new { id = job.JobId }, job);
         }
 
-        // DELETE: api/Opgaves/5
+        // DELETE: api/Jobs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOpgave([FromRoute] int id)
+        public async Task<IActionResult> DeleteJob([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var opgave = await _context.Opgaver.FindAsync(id);
-            if (opgave == null)
+            var job = await _context.Jobs.FindAsync(id);
+            if (job == null)
             {
                 return NotFound();
             }
 
-            _context.Opgaver.Remove(opgave);
+            _context.Jobs.Remove(job);
             await _context.SaveChangesAsync();
 
-            return Ok(opgave);
+            return Ok(job);
         }
 
-        private bool OpgaveExists(int id)
+        private bool JobExists(int id)
         {
-            return _context.Opgaver.Any(e => e.OpgaveId == id);
+            return _context.Jobs.Any(e => e.JobId == id);
         }
     }
 }

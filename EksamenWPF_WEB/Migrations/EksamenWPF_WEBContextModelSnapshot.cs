@@ -72,6 +72,65 @@ namespace EksamenWPF_WEB.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("EksamenWPF_WEB.Models.Assignment", b =>
+                {
+                    b.Property<int>("AssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Customer");
+
+                    b.Property<string>("ModelName");
+
+                    b.HasKey("AssignmentId");
+
+                    b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("EksamenWPF_WEB.Models.Job", b =>
+                {
+                    b.Property<int>("JobId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comments");
+
+                    b.Property<string>("Customer");
+
+                    b.Property<string>("Location");
+
+                    b.Property<int>("NumberOfDays");
+
+                    b.Property<int>("NumberOfModels");
+
+                    b.Property<string>("StartDate");
+
+                    b.HasKey("JobId");
+
+                    b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("EksamenWPF_WEB.Models.JobReport", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<int>("Cost");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Job");
+
+                    b.Property<int>("JobReportId");
+
+                    b.Property<int>("ModelId");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobReports");
+                });
+
             modelBuilder.Entity("EksamenWPF_WEB.Models.Model", b =>
                 {
                     b.Property<int>("ModelId")
@@ -88,13 +147,13 @@ namespace EksamenWPF_WEB.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("TelephoneNumber");
+                    b.Property<string>("TelephoneNumber");
 
                     b.Property<int>("Weight");
 
                     b.HasKey("ModelId");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -209,6 +268,14 @@ namespace EksamenWPF_WEB.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("EksamenWPF_WEB.Models.JobReport", b =>
+                {
+                    b.HasOne("EksamenWPF_WEB.Models.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

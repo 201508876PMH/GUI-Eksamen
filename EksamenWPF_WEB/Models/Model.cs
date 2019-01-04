@@ -11,7 +11,7 @@ namespace EksamenWPF_WEB.Models
         public int ModelId { get; set; }
 
         public string Name { get; set; }
-        public int TelephoneNumber { get; set; }
+        public string TelephoneNumber { get; set; }
         public string Address { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }

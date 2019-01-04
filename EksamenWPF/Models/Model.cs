@@ -15,9 +15,11 @@ namespace EksamenWPF.Models
 {
     public class Model
     {
+        // Primary key
         public int ModelId { get; set; }
+
         public string Name { get; set; }
-        public int TelephoneNumber { get; set; }
+        public string TelephoneNumber { get; set; }
         public string Address { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
@@ -73,7 +75,7 @@ namespace EksamenWPF.Models
 
             Model newModel = new Model();
             newModel.Name = name;
-            newModel.TelephoneNumber = Int32.Parse(telephonenumber);
+            newModel.TelephoneNumber = telephonenumber;
             newModel.Address = address;
             newModel.Height = Int32.Parse(height);
             newModel.Weight = Int32.Parse(weight);

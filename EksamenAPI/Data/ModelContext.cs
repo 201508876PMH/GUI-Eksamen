@@ -7,15 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EksamenAPI.Data
 {
-    public class ModelContext : DbContext
+    public class ModelContext : DbContext 
     {
-        public ModelContext(DbContextOptions<ModelContext> options) : base(options)
-        {
-
-        }
-
+        public ModelContext(DbContextOptions<ModelContext> options)
+            : base(options) { }
         public DbSet<Model> Models { get; set; }
-        public DbSet<Opgave> Opgaver { get; set; }  
+        public DbSet<Job> Jobs { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+
     }
 }

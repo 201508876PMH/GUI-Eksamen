@@ -37,11 +37,13 @@ namespace EksamenWPF.Models
             object[] array = (object[])parameter;
             var customer = array[0].ToString();
             var modelName = array[1].ToString();
+           
             
 
 
             Assignment newAssignment = new Assignment();
             newAssignment.Customer = customer;
+
             newAssignment.ModelName = modelName;
             
 

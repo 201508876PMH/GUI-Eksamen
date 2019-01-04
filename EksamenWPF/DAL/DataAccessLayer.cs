@@ -37,13 +37,13 @@ namespace EksamenWPF.DAL
 
         /*********************************************/
 
-        public Task<HttpResponseMessage> POSTAddNewOpgave(Opgave opgave)
+        public Task<HttpResponseMessage> POSTAddNewJob(Job job)
         {
-            return _HttpClient.PostAsJsonAsync("api/Opgaves", opgave);
+            return _HttpClient.PostAsJsonAsync("api/Jobs", job);
         }
-        public Task<string> GETListOpgaver()
+        public Task<string> GETListJobs()
         {
-            return _HttpClient.GetStringAsync("api/Opgaves");
+            return _HttpClient.GetStringAsync("api/Jobs");
         }
 
         /*********************************************/
