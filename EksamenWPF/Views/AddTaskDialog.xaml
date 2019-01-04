@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EksamenWPF.Views"
         mc:Ignorable="d"
+        Icon="../Sora-Meliae-Matrilineare-Mimes-image-x-ico.ico"
         WindowStartupLocation="CenterOwner"
         Title="Add Model" Height="330" Width="800">
     <Window.Resources>

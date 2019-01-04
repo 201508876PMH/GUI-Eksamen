@@ -100,7 +100,7 @@ namespace EksamenWPF
 
         private async void ListView2_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ItemList.FontSize = 14;
+            //ItemList.FontSize = 14;
             DataAccessLayer DAL = new DataAccessLayer();
 
             var result = await DAL.GETListJobs();

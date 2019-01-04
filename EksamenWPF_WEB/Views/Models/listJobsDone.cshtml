@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<EksamenWPF_WEB.Models.JobReport>
 
 @{
-    ViewData["Title"] = "listJobsDone";
+    ViewData["Title"] = "List of all done model jobs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>listJobsDone</h2>
+<h2>List of all done model jobs</h2>
 
 <table class="table">
     <thead>
@@ -42,7 +42,7 @@
             </td>
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.JobReportId">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.JobReportId">Details</a> |
+                @*<a asp-action="Details" asp-route-id="@item.JobReportId">Details</a> |*@
                 @*<a asp-action="Delete" asp-route-id="@item.JobReportId">Delete</a>*@
             </td>
         </tr>

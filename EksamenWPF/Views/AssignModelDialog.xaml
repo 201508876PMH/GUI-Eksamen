@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EksamenWPF.Views"
         mc:Ignorable="d"
+        Icon="../Sora-Meliae-Matrilineare-Mimes-image-x-ico.ico"
          WindowStartupLocation="CenterOwner"
         Title="Assign model a task" Height="160" Width="800">
     <Window.Resources>

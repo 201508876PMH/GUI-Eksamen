@@ -7,6 +7,7 @@
         xmlns:views="clr-namespace:EksamenWPF.Views"
         xmlns:ViewModels="clr-namespace:EksamenWPF.ViewModels"
         mc:Ignorable="d"
+        Icon="Sora-Meliae-Matrilineare-Mimes-image-x-ico.ico"
         WindowStartupLocation="CenterScreen"
         Title="Modelbureau" Height="550" Width="1200" >
 
