@@ -119,8 +119,6 @@ namespace EksamenWPF.Models
             {
                 case MessageBoxResult.Yes:
 
-                  
-
                     int id = CurrentModel.ModelId;
 
                     Model newModel = new Model();
@@ -132,7 +130,7 @@ namespace EksamenWPF.Models
                     {
                         MessageBox.Show("Item removed successfully, with statuscode: " + respons.Result.StatusCode);
                         
-                        Remove(newModel);
+                        Remove(CurrentModel);
                     }
                     else
                     {

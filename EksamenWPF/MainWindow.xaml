@@ -49,14 +49,14 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" FontWeight="Bold">Register of models:</Label>
             <Button Grid.Column="1" Width="auto" Name="AddModelBttn" Click="AddModelBttn_OnClick">Add model to list</Button>
-            <Button Grid.Column="2" Width="auto"  Command="{Binding Path=DeleteCommand}" 
+            <Button Grid.Column="2" Width="auto"  Command="{Binding Path=DeleteCommand}" DataContext="{Binding Models}"
                     IsEnabled="{Binding ElementName=ItemList, Path=SelectedItems.Count}" CommandParameter="{Binding ElementName=ItemList, Path=SelectedItem}">Remove selected model</Button>
            
 
 
 
         </Grid >
-        <ListView DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Models}" Grid.Row="2" Grid.ColumnSpan="3" Background="AliceBlue"  Name="ItemList" ItemsSource="{Binding}" Loaded="ItemList_OnLoaded" SelectedItem="{Binding CurrentModel}" >
+        <ListView DataContext="{Binding Models}" Grid.Row="2" Grid.ColumnSpan="3" Background="AliceBlue"  Name="ItemList" ItemsSource="{Binding}" Loaded="ItemList_OnLoaded" SelectedItem="{Binding CurrentModel}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="Id." DisplayMemberBinding="{Binding Path=ModelId}"></GridViewColumn>
